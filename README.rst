@@ -62,7 +62,7 @@ The following are the demo application instances, some of which will be utilized
 
    "NA1", "North America", "AWS - US East (N. Virginia)", "34.229.48.248", "http://na1-auction.cloudservicesdemo.net/"
    "NA2", "North America", "AWS – US East (N. Virginia)", "318.232.64.254", "http://na2-auction.cloudservicesdemo.net/"
-   "NA3", "North America", "Azure – US East", "52.226.147.184", "http://na3-auction.cloudservicesdemo.net/"
+   "NA3", "North America", "Azure – US East", "13.82.106.211", "http://na3-auction.cloudservicesdemo.net/"
    "EU", "Europe", "AWS – Europe (Frankfurt)", "3.122.191.227", "http://eu-auction.cloudservicesdemo.net/"
  
 
@@ -506,7 +506,7 @@ Let's now add a few more endpoints for load balancing of the application. Note t
    
    .. figure:: _figures/93.png 
    
-   Create one more endpoint repeating the step above using the following properties: "na3-auction" for name, "52.226.147.184" for IP address, "80" for port. You will have three endpoints as a result. 
+   Create one more endpoint repeating the step above using the following properties: "na3-auction" for name, "13.82.106.211" for IP address, "80" for port. You will have three endpoints as a result. 
    
    .. figure:: _figures/94.png 
    
