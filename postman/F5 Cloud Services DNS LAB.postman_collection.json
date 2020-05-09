@@ -1,0 +1,985 @@
+{
+	"info": {
+		"_postman_id": "68bb9a1a-fc8a-4ebb-b0a7-dd8e3d2fcd05",
+		"name": "F5 Cloud Services DNS LAB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Core Requests",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5f69fafb-8adb-4048-a793-e9501aa7e0f1",
+								"exec": [
+									"pm.test(\"Set token variable\", function() {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"ACCESS_TOKEN\", jsonData.access_token);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"{{USER_EMAIL}}\", \"password\": \"{{USER_PASSWORD}}\" }"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-auth/login",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "16513967-a6da-43c3-8189-0f0a8c560199",
+								"exec": [
+									"pm.test(\"Set account_id and user_id variables\", function() {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"ACCOUNT_ID\", jsonData.primary_account_id);",
+									"    pm.environment.set(\"USER_ID\", jsonData.id);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-account/user",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-account",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get DNS Zone (lab)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0cc231c9-8d23-473b-a56a-f224ec37ccb8",
+								"exec": [
+									"pm.test(\"Get User's DNS Zone Name\", function() {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"ZONE_NAME\", jsonData.zone);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{DNS_WEB_ADMIN}}/zone",
+							"protocol": "http",
+							"host": [
+								"{{DNS_WEB_ADMIN}}"
+							],
+							"path": [
+								"zone"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Membership",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ba388a57-48a4-4052-9def-45bf9b63b689",
+								"exec": [
+									"pm.test(\"Switch account\", function() {",
+									"    var jsonData = pm.response.json();",
+									"    for(var i=0; i<jsonData.memberships.length; i++) {",
+									"        if (jsonData.memberships[i].account_name === \"{{ACCOUNT_NAME}}\") {",
+									"            pm.environment.set(\"ACCOUNT_ID\", jsonData.memberships[i].account_id);",
+									"        }",
+									"    }",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-account/users/{{USER_ID}}/memberships",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-account",
+								"users",
+								"{{USER_ID}}",
+								"memberships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Catalogs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e0076139-ff8f-40dc-ae2d-a915d0cb5cdb",
+								"exec": [
+									"pm.test(\"Set Catalog variables\", function() {",
+									"    var jsonData = pm.response.json();",
+									"    for(var i=0; i<jsonData.Catalogs.length; i++) {",
+									"        if (jsonData.Catalogs[i].service_type === \"waf\") {",
+									"            pm.environment.set(\"WAF_CATALOG_ID\", jsonData.Catalogs[i].catalog_id);",
+									"        }",
+									"        ",
+									"        if (jsonData.Catalogs[i].service_type === \"adns\") {",
+									"            pm.environment.set(\"DNS_CATALOG_ID\", jsonData.Catalogs[i].catalog_id);",
+									"        }",
+									"        ",
+									"        if (jsonData.Catalogs[i].service_type === \"gslb\") {",
+									"            pm.environment.set(\"GSLB_CATALOG_ID\", jsonData.Catalogs[i].catalog_id);",
+									"        }",
+									"    }",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-catalog/catalogs",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-catalog",
+								"catalogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Previously Created Subscriptions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
+								"exec": [
+									"pm.test(\"Find previously created subscriptions\", function() {",
+									"    const jsonData = pm.response.json();",
+									"    for(var i=0; i < jsonData.subscriptions.length; i++) {",
+									"        const subscription = jsonData.subscriptions[i];",
+									"        const zoneName = pm.environment.get(\"ZONE_NAME\");",
+									"        if (subscription.service_type === \"adns\" && subscription.service_instance_name === zoneName) {",
+									"            pm.environment.set(\"DNS_SUBSCRIPTION_ID\", subscription.subscription_id);",
+									"        }",
+									"        if (subscription.service_type === \"gslb\" && subscription.service_instance_name === zoneName) {",
+									"            pm.environment.set(\"GSLB_SUBSCRIPTION_ID\", subscription.subscription_id);",
+									"        }",
+									"        if (subscription.service_type === \"waf\" && subscription.service_instance_name === (\"na2-auction.\" + zoneName)) {",
+									"            pm.environment.set(\"WAF_SUBSCRIPTION_ID\", subscription.subscription_id);",
+									"            pm.environment.set(\"WAF_CNAME\", subscription.configuration.details.CNAMEValue);",
+									"        }",
+									"    }",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions?account_id={{ACCOUNT_ID}}",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions"
+							],
+							"query": [
+								{
+									"key": "account_id",
+									"value": "{{ACCOUNT_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "DNS",
+			"item": [
+				{
+					"name": "Create DNS Subscription",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2be2c130-9eb2-4ce8-a50a-753f57c5af4e",
+								"exec": [
+									"pm.test(\"Set DNS subscription id variable\", function() {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"DNS_SUBSCRIPTION_ID\", jsonData.subscription_id);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account_id\": \"{{ACCOUNT_ID}}\",\n  \"catalog_id\": \"{{DNS_CATALOG_ID}}\",\n  \"service_instance_name\": \"{{ZONE_NAME}}\",\n  \"configuration\": {\n    \"adns_service\": {\n      \"zone\": \"{{ZONE_NAME}}\",\n      \"master_servers\": [\n        \"54.211.12.173\"\n      ]\n    }\n  },\n  \"service_type\": \"adns\"\n}"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate DNS Subscription",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subscription_id\": \"{{DNS_SUBSCRIPTION_ID}}\",\n  \"omit_config\": true\n}"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{DNS_SUBSCRIPTION_ID}}/activate",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{DNS_SUBSCRIPTION_ID}}",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get DNS Subscription Zones",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{DNS_SUBSCRIPTION_ID}}/test",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{DNS_SUBSCRIPTION_ID}}",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get DNS JSON",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{DNS_SUBSCRIPTION_ID}}",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{DNS_SUBSCRIPTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "DNS Load Balancer",
+			"item": [
+				{
+					"name": "Create GSLB Subscription",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2be2c130-9eb2-4ce8-a50a-753f57c5af4e",
+								"exec": [
+									"pm.test(\"Set GSLB subscription id variable\", function() {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"GSLB_SUBSCRIPTION_ID\", jsonData.subscription_id);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account_id\": \"{{ACCOUNT_ID}}\",\n  \"catalog_id\": \"{{GSLB_CATALOG_ID}}\",\n  \"service_instance_name\": \"{{ZONE_NAME}}\",\n  \"configuration\": {\n    \"gslb_service\": {\n      \"zone\": \"{{ZONE_NAME}}\",\n      \"load_balanced_records\": {\n        \"lbrs_auction\": {\n          \"aliases\": [\n            \"auction\"\n          ],\n          \"display_name\": \"auction.{{ZONE_NAME}}\",\n          \"enable\": true,\n          \"persistence\": false,\n          \"proximity_rules\": [\n            {\n              \"pool\": \"pools_usa\",\n              \"region\": \"regions_usa\",\n              \"score\": 1\n            }\n          ],\n          \"rr_type\": \"A\"\n        }\n      },\n      \"pools\": {\n        \"pools_usa\": {\n          \"display_name\": \"usa\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na1_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        }\n      },\n      \"regions\": {\n        \"regions_usa\": {\n          \"display_name\": \"usa\",\n          \"sectors\": [\n            {\n              \"code\": \"NA\",\n              \"scale\": \"continent\"\n            }\n          ]\n        }\n      },\n      \"virtual_servers\": {\n        \"ipEndpoint_na1_auction\": {\n          \"address\": \"34.229.48.248\",\n          \"display_name\": \"na1-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        }\n      }\n    }\n  },\n  \"service_type\": \"gslb\"\n}"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate GSLB Subscription",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subscription_id\": \"{{GSLB_SUBSCRIPTION_ID}}\",\n  \"omit_config\": true\n}"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{GSLB_SUBSCRIPTION_ID}}/activate",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{GSLB_SUBSCRIPTION_ID}}",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test NA Availability (lab)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"domain\": \"auction.{{ZONE_NAME}}\"\n}"
+						},
+						"url": {
+							"raw": "http://{{DNS_WEB_ADMIN}}/proxy/northamerica",
+							"protocol": "http",
+							"host": [
+								"{{DNS_WEB_ADMIN}}"
+							],
+							"path": [
+								"proxy",
+								"northamerica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Endpoints & Pool Members",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subscription_id\": \"{{GSLB_SUBSCRIPTION_ID}}\",\n  \"account_id\": \"{{ACCOUNT_ID}}\",\n  \"catalog_id\": \"{{GSLB_CATALOG_ID}}\",\n  \"service_instance_name\": \"{{ZONE_NAME}}\",\n  \"configuration\": {\n    \"gslb_service\": {\n      \"zone\": \"{{ZONE_NAME}}\",\n      \"load_balanced_records\": {\n        \"lbrs_auction\": {\n          \"aliases\": [\n            \"auction\"\n          ],\n          \"display_name\": \"auction.{{ZONE_NAME}}\",\n          \"enable\": true,\n          \"persistence\": false,\n          \"proximity_rules\": [\n            {\n              \"pool\": \"pools_usa\",\n              \"region\": \"global\",\n              \"score\": 1\n            },\n            {\n              \"pool\": \"pools_europe\",\n              \"region\": \"global\",\n              \"score\": 1\n            },\n            {\n              \"pool\": \"pools_australia\",\n              \"region\": \"global\",\n              \"score\": 1\n            }\n          ],\n          \"rr_type\": \"A\"\n        }\n      },\n      \"pools\": {\n        \"pools_usa\": {\n          \"display_name\": \"usa\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na1_auction\"\n            },\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na2_auction\"\n            },\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na3_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        },\n        \"pools_europe\": {\n          \"display_name\": \"europe\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_eu_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        },\n        \"pools_australia\": {\n          \"display_name\": \"australia\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_au_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        }\n      },\n      \"virtual_servers\": {\n        \"ipEndpoint_na1_auction\": {\n          \"address\": \"34.229.48.248\",\n          \"display_name\": \"na1-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_eu_auction\": {\n          \"address\": \"3.122.191.227\",\n          \"display_name\": \"eu-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_na2_auction\": {\n          \"address\": \"18.232.64.254\",\n          \"display_name\": \"na2-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_na3_auction\": {\n          \"address\": \"52.226.147.184\",\n          \"display_name\": \"na3-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_au_auction\": {\n          \"address\": \"54.206.13.195\",\n          \"display_name\": \"au-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        }\n      }\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{GSLB_SUBSCRIPTION_ID}}",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{GSLB_SUBSCRIPTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Round Robin (lab)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ACCESS_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"domain\": \"auction.{{ZONE_NAME}}\"\n}"
+						},
+						"url": {
+							"raw": "http://{{DNS_WEB_ADMIN}}/proxy/northamerica",
+							"protocol": "http",
+							"host": [
+								"{{DNS_WEB_ADMIN}}"
+							],
+							"path": [
+								"proxy",
+								"northamerica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Proximity Rules & Regions",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subscription_id\": \"{{GSLB_SUBSCRIPTION_ID}}\",\n  \"account_id\": \"{{ACCOUNT_ID}}\",\n  \"catalog_id\": \"{{GSLB_CATALOG_ID}}\",\n  \"service_instance_name\": \"{{ZONE_NAME}}\",\n  \"configuration\": {\n    \"gslb_service\": {\n      \"zone\": \"{{ZONE_NAME}}\",\n      \"load_balanced_records\": {\n        \"lbrs_auction\": {\n          \"aliases\": [\n            \"auction\"\n          ],\n          \"display_name\": \"auction.{{ZONE_NAME}}\",\n          \"enable\": true,\n          \"persistence\": false,\n          \"proximity_rules\": [\n            {\n              \"pool\": \"pools_usa\",\n              \"region\": \"regions_usa\",\n              \"score\": 1\n            },\n            {\n              \"pool\": \"pools_europe\",\n              \"region\": \"regions_europe\",\n              \"score\": 50\n            },\n            {\n              \"pool\": \"pools_australia\",\n              \"region\": \"regions_australia\",\n              \"score\": 50\n            }\n          ],\n          \"rr_type\": \"A\"\n        }\n      },\n      \"pools\": {\n        \"pools_usa\": {\n          \"display_name\": \"usa\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na1_auction\"\n            },\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na2_auction\"\n            },\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na3_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        },\n        \"pools_europe\": {\n          \"display_name\": \"europe\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_eu_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        },\n        \"pools_australia\": {\n          \"display_name\": \"australia\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_au_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        }\n      },\n      \"regions\": {\n        \"regions_europe\": {\n          \"display_name\": \"europe\",\n          \"sectors\": [\n            {\n              \"code\": \"EU\",\n              \"scale\": \"continent\"\n            }\n          ]\n        },\n        \"regions_usa\": {\n          \"display_name\": \"usa\",\n          \"sectors\": [\n            {\n              \"code\": \"NA\",\n              \"scale\": \"continent\"\n            }\n          ]\n        },\n        \"regions_australia\": {\n          \"display_name\": \"australia\",\n          \"sectors\": [\n            {\n              \"code\": \"AU\",\n              \"scale\": \"continent\"\n            }\n          ]\n        }\n      },\n      \"virtual_servers\": {\n         \"ipEndpoint_na1_auction\": {\n          \"address\": \"34.229.48.248\",\n          \"display_name\": \"na1-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_eu_auction\": {\n          \"address\": \"3.122.191.227\",\n          \"display_name\": \"eu-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_na2_auction\": {\n          \"address\": \"18.232.64.254\",\n          \"display_name\": \"na2-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_na3_auction\": {\n          \"address\": \"52.226.147.184\",\n          \"display_name\": \"na3-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_au_auction\": {\n          \"address\": \"54.206.13.195\",\n          \"display_name\": \"au-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        }\n      },\n      \"regions\": {\n        \"regions_europe\": {\n          \"display_name\": \"europe\",\n          \"sectors\": [\n            {\n              \"code\": \"EU\",\n              \"scale\": \"continent\"\n            }\n          ]\n        },\n        \"regions_australia\": {\n          \"display_name\": \"australia\",\n          \"sectors\": [\n            {\n              \"scale\": \"continent\",\n              \"code\": \"OC\"\n            }\n          ]\n        },\n        \"regions_usa\": {\n          \"display_name\": \"usa\",\n          \"sectors\": [\n            {\n              \"code\": \"NA\",\n              \"scale\": \"continent\"\n            }\n          ]\n        }\n      }\n    }\n  },\n  \"service_type\": \"gslb\"\n}"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{GSLB_SUBSCRIPTION_ID}}",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{GSLB_SUBSCRIPTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Proximity Rules (lab)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"domain\": \"auction.{{ZONE_NAME}}\"\n}"
+						},
+						"url": {
+							"raw": "http://{{DNS_WEB_ADMIN}}/proxy/europe",
+							"protocol": "http",
+							"host": [
+								"{{DNS_WEB_ADMIN}}"
+							],
+							"path": [
+								"proxy",
+								"europe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get GSLB JSON",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{GSLB_SUBSCRIPTION_ID}}",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{GSLB_SUBSCRIPTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Clean Up",
+			"item": [
+				{
+					"name": "Retire DNS Subscription",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subscription_id\": \"{{DNS_SUBSCRIPTION_ID}}\",\n  \"omit_config\": true\n}"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{DNS_SUBSCRIPTION_ID}}/retire",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{DNS_SUBSCRIPTION_ID}}",
+								"retire"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retire GSLB Subscription",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subscription_id\": \"{{GSLB_SUBSCRIPTION_ID}}\",\n  \"omit_config\": true\n}"
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{GSLB_SUBSCRIPTION_ID}}/retire",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-subscription",
+								"subscriptions",
+								"{{GSLB_SUBSCRIPTION_ID}}",
+								"retire"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0a4206ab-4905-4c26-afb8-8c829db509dc",
+								"exec": [
+									"pm.test(\"Reset token variable\", function() {",
+									"    pm.environment.set(\"ACCESS_TOKEN\", \"\");",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"access_token\": \"{{ACCESS_TOKEN}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-auth/logout",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
