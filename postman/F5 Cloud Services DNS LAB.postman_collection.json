@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "68bb9a1a-fc8a-4ebb-b0a7-dd8e3d2fcd05",
+		"_postman_id": "529776fc-78c0-44b6-b506-17dc3da7fcdc",
 		"name": "F5 Cloud Services DNS LAB",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,7 +14,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "5f69fafb-8adb-4048-a793-e9501aa7e0f1",
+								"id": "4095078e-0ac8-487c-b2c9-51413c98b303",
 								"exec": [
 									"pm.test(\"Set token variable\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -59,16 +59,69 @@
 					"response": []
 				},
 				{
+					"name": "Set User Info (optional)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fdf326d4-0690-4495-b596-adaa95164569",
+								"exec": [
+									"pm.test(\"Set account_id variable\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"ACCOUNT_ID\", jsonData.id);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Demo Account\",\n\t\"address\": {\n\t\t\"street_1\": \"801 5th Ave\",\n\t\t\"city\": \"Seattle\",\n\t\t\"state\": \"WA\",\n\t\t\"postal_code\": \"98104\",\n    \t\"country\": \"US\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-account/accounts",
+							"protocol": "https",
+							"host": [
+								"{{HOSTNAME}}"
+							],
+							"path": [
+								"{{API_VERSION}}",
+								"svc-account",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Current User",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "16513967-a6da-43c3-8189-0f0a8c560199",
+								"id": "8976ad02-6454-4256-b115-fb3ee3924d00",
 								"exec": [
-									"pm.test(\"Set account_id and user_id variables\", function() {",
+									"pm.test(\"Set account_id and user_id variables\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.environment.set(\"ACCOUNT_ID\", jsonData.primary_account_id);",
+									"    if (!pm.environment.get(\"ACCOUNT_ID\")) {",
+									"        pm.environment.set(\"ACCOUNT_ID\", jsonData.primary_account_id);",
+									"    }",
 									"    pm.environment.set(\"USER_ID\", jsonData.id);",
 									"})",
 									""
@@ -107,7 +160,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0cc231c9-8d23-473b-a56a-f224ec37ccb8",
+								"id": "3061c170-e652-49a7-bba7-4afd5208ff7d",
 								"exec": [
 									"pm.test(\"Get User's DNS Zone Name\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -153,7 +206,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "ba388a57-48a4-4052-9def-45bf9b63b689",
+								"id": "d4d2616b-54d5-455c-b129-250c5ebd7634",
 								"exec": [
 									"pm.test(\"Switch account\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -200,7 +253,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e0076139-ff8f-40dc-ae2d-a915d0cb5cdb",
+								"id": "a1a36612-945a-43fd-bf3e-71402a1acec5",
 								"exec": [
 									"pm.test(\"Set Catalog variables\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -253,7 +306,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
+								"id": "327950e5-acfc-44f8-9c4f-8b494c355375",
 								"exec": [
 									"pm.test(\"Find previously created subscriptions\", function() {",
 									"    const jsonData = pm.response.json();",
@@ -325,7 +378,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "2be2c130-9eb2-4ce8-a50a-753f57c5af4e",
+								"id": "f4fbc1e5-ff25-4858-84bd-6b8cb46a644b",
 								"exec": [
 									"pm.test(\"Set DNS subscription id variable\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -415,7 +468,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
+								"id": "c0ac930e-6606-431e-afdb-61e2d8f15f78",
 								"exec": [
 									""
 								],
@@ -461,7 +514,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
+								"id": "9b09a129-e165-46da-948d-c549eb93bc13",
 								"exec": [
 									""
 								],
@@ -512,7 +565,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "2be2c130-9eb2-4ce8-a50a-753f57c5af4e",
+								"id": "a0e0f0a7-92a5-436e-bc4b-8c272e9b4c75",
 								"exec": [
 									"pm.test(\"Set GSLB subscription id variable\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -781,7 +834,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
+								"id": "ea07083c-25e9-42e2-961f-25fa3119cd66",
 								"exec": [
 									""
 								],
@@ -832,7 +885,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
+								"id": "cc4bae69-d0eb-46ca-a3a0-cbcfffe7ccc3",
 								"exec": [
 									""
 								],
@@ -882,7 +935,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b94ca704-83de-44bd-8d07-01ed42430ad4",
+								"id": "250d8b35-2958-4d9d-9135-f09f3fc41c6a",
 								"exec": [
 									""
 								],
@@ -932,7 +985,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0a4206ab-4905-4c26-afb8-8c829db509dc",
+								"id": "de208067-9f9b-482a-b2d8-d7b9e4dacbd1",
 								"exec": [
 									"pm.test(\"Reset token variable\", function() {",
 									"    pm.environment.set(\"ACCESS_TOKEN\", \"\");",
