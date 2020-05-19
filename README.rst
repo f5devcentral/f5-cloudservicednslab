@@ -1,5 +1,5 @@
-Agility LAB: F5 DNS Cloud Service & F5 DNS Load Balancer Cloud Service   
-===========================================
+LAB: F5 DNS Cloud Service & F5 DNS Load Balancer Cloud Service   
+==============================================================
 
 .. contents:: Table of Contents 
 
@@ -30,7 +30,9 @@ Pre-Requisites
 - Opera browser: for simulating geo-location specific traffic
 - Any text editor: for duplicating Load Balanced Record 
 
-NOTE: If you are taking this lab during the Agility conference, then you will be provided with access to a jumpbox that should contain pre-configured Postman, Chrome and Opera browsers. 
+**IMPORTANT NOTE**: If you originally signed up for F5 Cloud Services through a Limited User invitation (such as an email invite from another lab or from a different account owner), then it is possible that you haven't yet completed a full registration. 
+
+You can quickly tell if you have a full account by looking at your account(s) in the `F5 Cloud Services Portal <https://portal.cloudservices.f5.com/>`_. If you do now see any "Accounts you own:" and only see "Accounts you've been granted access to" as a **"Limited User"**, then you will need to create a full account / update user info before you can proceed with this lab. You can do so in the step 4(c) below via the F5 Cloud Services API using the Postman request titled "Set User Info (optional)", the details of which are outlined below after the Login. 
 
 Lab Environment Overview
 ###############################
@@ -72,7 +74,7 @@ The following diagram is a simplified architecture of the Auction application:
 .. figure:: _figures/Auction.png
 
 Lab Environment Setup / Validation
-###############################
+##################################
 
 1. F5 Cloud Services Portal
 ***************************
@@ -93,7 +95,18 @@ In order to access specific F5 Cloud Services, you need to subscribe to the corr
 
    .. figure:: _figures/2.png 
 
-   `2.` You will be asked to add your payment card to cover service usage (you only pay for what you use) or to subscribe through AWS Marketplace. Note that if you're running this lab at the Agility event, you will be provided with Trial/Free access to the F5 Cloud Servies (speak to the Lab facilitator if you don't have access).
+   `2.` For the purposes of the lab you can utilize the Free Tier for both the DNS and DNS Load Balancer services. **NOTE**: you will be asked to add your payment card even for the free tier, however you will not be charged if you follow the Free Tier guidelines outlined here:
+
+   - `F5 DNS Cloud Service Pricing <https://clouddocs.f5.com/cloud-services/latest/f5-cloud-services-DNS-Pricing.html>`_
+   - `F5 DNS Load Balancer Service Pricing <https://clouddocs.f5.com/cloud-services/latest/f5-cloud-services-GSLB-Pricing.html>`_
+
+   Should you decide to add additional zones or LBR records beyond the Free Tier, you will only pay for what you use.
+
+   You may also choose to not use a credit card, and instead subscribe through **AWS Marketplace**.
+
+   - `"WS Marketplace: F5 DNS Cloud Service <https://aws.amazon.com/marketplace/pp/B07NKSRQ99>`_
+   - `AWS Marketplace: F5 DNS Load Balancer Service <https://aws.amazon.com/marketplace/pp/B07W3P8HM4>`_
+   
 
    .. figure:: _figures/33.jpg 
    
@@ -164,6 +177,7 @@ These tokens are then stored for subsequent calls using a function inside Postma
 
 .. figure:: _figures/10.jpg 
 
+`c)` OPTIONAL: Set User ID & Account Info
 
 **IMPORTANT NOTE**: If you originally signed up for F5 Cloud Services through a Limited User invitation (such as an email invite from another lab or from a different account owner), then it is possible that you haven't yet completed a full registration. You can quickly tell if you have by looking at your account(s) in the `F5 Cloud Services Portal <https://portal.cloudservices.f5.com/>`_ If you do now see any "Accounts you own:" and only see "Accounts you've been granted access to" as a **"Limited User"**, then you need to create a full account / update user info before you can proceed with this lab.
 
@@ -179,7 +193,7 @@ More information on this API request can be found `here <https://portal.cloudser
 
 At this point you should be a full user with an "Owned Account" and a primary organization account id, which can also be confirmed in the `F5 Cloud Services Portal <https://portal.cloudservices.f5.com/>`_ in the drop-down under your user name (top right), where you should see "Accounts you own:" and the Organization Account you created with **"Owner"** defined.
 
-`c)` Retrieve User ID & Account ID 
+`d)` Retrieve User ID & Account ID 
 
 Select the **Get Current User** request and click **Send** to retrieve User ID and Account ID to be used in the further requests. 
 
@@ -195,7 +209,7 @@ The retrieved User ID and Account ID are then stored for subsequent calls.
 
 More detailed information on this API request can be found `here <http://bit.ly/37hyQw3>`_. 
 
-`d)` Let’s now retrieve DNS Zone Name with the **Get DNS Zone (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to validate existence of your F5 account & return back a Zone name unique to your lab. 
+`e)` Let’s now retrieve DNS Zone Name with the **Get DNS Zone (lab)** API call. Click **Send**. This call will pass your “ACCESS_TOKEN” in the header of the request to the Labs API in order to validate existence of your F5 account & return back a Zone name unique to your lab. 
 
 Request: 
 
