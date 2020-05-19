@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "529776fc-78c0-44b6-b506-17dc3da7fcdc",
+		"_postman_id": "6b729533-a33d-4298-bf23-e198d57ad33d",
 		"name": "F5 Cloud Services DNS LAB",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,7 +14,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "4095078e-0ac8-487c-b2c9-51413c98b303",
+								"id": "001c4fe5-6979-49d2-9d9b-059b15f0591c",
 								"exec": [
 									"pm.test(\"Set token variable\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -64,7 +64,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "fdf326d4-0690-4495-b596-adaa95164569",
+								"id": "6ecfe359-0fd4-4695-aa33-883a0907e860",
 								"exec": [
 									"pm.test(\"Set account_id variable\", function () {",
 									"    var jsonData = pm.response.json();",
@@ -115,7 +115,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "8976ad02-6454-4256-b115-fb3ee3924d00",
+								"id": "84b468de-bda4-4da1-ac8d-8ae63ae0a12b",
 								"exec": [
 									"pm.test(\"Set account_id and user_id variables\", function () {",
 									"    var jsonData = pm.response.json();",
@@ -160,7 +160,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "3061c170-e652-49a7-bba7-4afd5208ff7d",
+								"id": "14f28fd5-ab51-48eb-87fc-7bff40a88a21",
 								"exec": [
 									"pm.test(\"Get User's DNS Zone Name\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -206,7 +206,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d4d2616b-54d5-455c-b129-250c5ebd7634",
+								"id": "efba8086-61cb-4775-9674-27c4d2473b1d",
 								"exec": [
 									"pm.test(\"Switch account\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -253,7 +253,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a1a36612-945a-43fd-bf3e-71402a1acec5",
+								"id": "6664fa48-b93f-46b1-91b2-c23169c20a06",
 								"exec": [
 									"pm.test(\"Set Catalog variables\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -306,7 +306,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "327950e5-acfc-44f8-9c4f-8b494c355375",
+								"id": "12b7415f-af22-480d-aec0-44723f68e515",
 								"exec": [
 									"pm.test(\"Find previously created subscriptions\", function() {",
 									"    const jsonData = pm.response.json();",
@@ -378,7 +378,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f4fbc1e5-ff25-4858-84bd-6b8cb46a644b",
+								"id": "ad2ef6bf-5837-4559-95c1-9fc15f6e60d1",
 								"exec": [
 									"pm.test(\"Set DNS subscription id variable\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -468,7 +468,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "c0ac930e-6606-431e-afdb-61e2d8f15f78",
+								"id": "4577981d-4813-4680-bf95-e84de4cc2c5d",
 								"exec": [
 									""
 								],
@@ -514,7 +514,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "9b09a129-e165-46da-948d-c549eb93bc13",
+								"id": "e4784ec8-37c3-460e-bc13-b320f5ba58fd",
 								"exec": [
 									""
 								],
@@ -565,7 +565,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a0e0f0a7-92a5-436e-bc4b-8c272e9b4c75",
+								"id": "65202952-4bb1-460e-b8c9-f3477bc8efd7",
 								"exec": [
 									"pm.test(\"Set GSLB subscription id variable\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -834,7 +834,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "ea07083c-25e9-42e2-961f-25fa3119cd66",
+								"id": "e5c6b148-f1f4-4f5b-9fac-ecca3e7df211",
 								"exec": [
 									""
 								],
@@ -885,7 +885,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "cc4bae69-d0eb-46ca-a3a0-cbcfffe7ccc3",
+								"id": "f515c6ea-79c6-4e14-b4a6-eb5d07a147a4",
 								"exec": [
 									""
 								],
@@ -935,7 +935,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "250d8b35-2958-4d9d-9135-f09f3fc41c6a",
+								"id": "f6340fd5-6d71-401a-aa5f-5ad0d35f06f0",
 								"exec": [
 									""
 								],
@@ -980,12 +980,37 @@
 					"response": []
 				},
 				{
+					"name": "Retire DNS Zone (lab)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{ACCESS_TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{DNS_WEB_ADMIN}}/zone/retire",
+							"protocol": "http",
+							"host": [
+								"{{DNS_WEB_ADMIN}}"
+							],
+							"path": [
+								"zone",
+								"retire"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Logout",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
-								"id": "de208067-9f9b-482a-b2d8-d7b9e4dacbd1",
+								"id": "f650a1d1-238f-466b-a62e-d665ca2b2239",
 								"exec": [
 									"pm.test(\"Reset token variable\", function() {",
 									"    pm.environment.set(\"ACCESS_TOKEN\", \"\");",
