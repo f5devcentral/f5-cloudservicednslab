@@ -515,7 +515,7 @@ Another way to test the new proximity rule is via **Command Prompt**.
 
    .. figure:: _figures/70.png 
 
-   `2.` Paste the following command to the **Command Prompt**: **nslookup "your LBR name"** and press **Enter**. 
+   `2.` Paste the following command to the **Command Prompt**: **nslookup "your FQDN name"** and press **Enter**.
 
    .. figure:: _figures/68.png 
 
@@ -641,7 +641,7 @@ Click **Add Rule** and **Save** the record. The new proximity rule will direct r
 
 Now let’s test the new proximity rule. This can be done either via the Opera browser or via your computer’s **Command Prompt** (see the next section).  
 
-   `1.` Open the Opera browser, copy LBR name (“auction."your zone name"”) in **Load balanced record properties** and paste into your browser. You will get to one of three available IP endpoints of the “america” pool.  
+   `1.` Open the Opera browser, copy FQDN name (“auction."your zone name"”) in **Load balanced record properties** and paste into your browser. You will get to one of three available IP endpoints of the “america” pool.
 
    .. figure:: _figures/50.png 
 
