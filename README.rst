@@ -398,11 +398,13 @@ In this section we will use the F5 Cloud Services UI to set up the Load Balancer
 Let’s now create DNS Load Balancer Service to be able to balance loads across multiple clouds (Azure & AWS) and provide global availability and performance with health-check and built-in DDoS protection. 
 
 `a)` Go to the **DNS Load Balancer** tab and click **Create**. 
-  
+
 .. figure:: _figures/16.png 
 
-`b)` Enter name of the zone we created above and click **Create**.  
-  
+`b)` Enter name of the zone we `created before <#zone-name>`_ and click **Create**.  
+
+.. figure:: _figures/27.jpg 
+
 .. figure:: _figures/17.png 
    
 Your DNS Load Balancer instance will appear on the list but in **Inactive** status. You can change the status after creating load balanced record and pool.
