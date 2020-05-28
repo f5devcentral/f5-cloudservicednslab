@@ -498,7 +498,7 @@ After creating all the components (IP endpoint, Pool, Region and Monitor), we ca
 
 Let’s test the created service with the proximity rule via browser.  
 
-   `1.` Copy LBR name in **Load balanced record properties** and paste into your browser.   
+   `1.` Open FQDN ("auction.{{zone name}}" where {{zone name}} is the value copied from postman in one of the step above) in your browser.
 
    .. figure:: _figures/29.png 
 
@@ -562,7 +562,7 @@ Let's now add the newly created endpoints to the existing pool.
 
 Let’s test the updated pool with the new endpoints via browser.  
 
-   `1.` Copy LBR name in **Load balanced record properties** and paste into your browser.   
+   `1.` Open FQDN ("auction.{{zone name}}" where {{zone name}} is the value copied from postman in one of the step above) in your browser.
 
    .. figure:: _figures/29.png 
 
@@ -728,7 +728,7 @@ Status will be updated a few seconds later.
 
    `1.` Open FQDN ("auction.{{zone name}}" where {{zone name}} is the value copied from postman in one of the step above) in your browser.
 
-   .. figure:: _figures/105.png
+   .. figure:: _figures/29.png
 
    `2.` You will see that acc to the proximity rule and pool members, you will get to endpoints belonging to the **america** pool in a round-robin manner. 
 
