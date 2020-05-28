@@ -615,7 +615,7 @@ Let's now create a pool and add a member to it.
 
    `1.` Go to the **Pools** tab and then click **Create**. 
   
-   .. figure:: _figures/24.png 
+   .. figure:: _figures/122.png
 
    `2.` Fill in "europe" name, choose "round-robin" method and define TTL "30". Then click **Next**.  
   
