@@ -478,19 +478,19 @@ Let's now create a pool and add a member to it.
 
 After creating all the components (IP endpoint, Pool, Region and Monitor), we can create a DNS Load Balancer record and its     proximity rule. 
 
-   `1.` Copy “zone name” from the **DNS** service we've created several steps above: 
+   `1.` Go to the **Load balanced records** tab and then click **Create**.
 
-   .. figure:: _figures/77.png 
+   .. figure:: _figures/118.png
 
-   `2.` Go back to the **DNS Load Balancer** tab, click on your service and then **Load balanced records**. Click **Create**. 
-   
-   .. figure:: _figures/28.png 
+   `2.` Fill in LBR name "auction", host "auction", select "A" as "Resource Record Type" and set a proximity rule ("Anywhere" -> "america" pool) to direct requests from anywhere to "america" pool with the created NA1 endpoint. Set score of the proximity rule to be "1". This will define the priority of the rule after some more are added.
 
-   Fill in LBR name ("auction.”zone name”", where “zone name” is the value copied in one of the step above), host ("auction"), select "A" as "Resource Record Type" and set a proximity rule ("Anywhere" -> "america" pool) to direct requests from anywhere to "america" pool with the created NA1 endpoint. Set score of the proximity rule to be "1". This will define the priority of the rule after some more are added.  
+   Click **Add Rule**, then check ***Enabled*** tick and **Save** the record.
 
-   Click **Add Rule** and **Save** the record. 
+   .. figure:: _figures/78.png
 
-   .. figure:: _figures/78.png 
+   `3.` Go back to the DNS Load Balancer tab, click on your service and activate it.
+
+   .. figure:: _figures/119.png
 
    The DNS Load Balancer service is now setup.  
 
@@ -706,12 +706,7 @@ Let's now create a new Load-balancing service via UI to copy the record to. To d
    Paste "zone2" name which you copied in step 1 above and click **Create**.  
 
    .. figure:: _figures/86.png 
-   
-   `4.` Activate the new DNS Load Balancer service by selecting **Activate** from the dropdown menu:
 
-   .. figure:: _figures/104.png 
-
-   Its status will be updated a few seconds later. 
 
 `c)` Update JSON 
 
@@ -723,11 +718,17 @@ Click on your newly created service and open the **JSON configuration** tab. Pas
 
 Go back to the newly created Load-balancing service to see the newly created record which is the copy of the original one.  
 
-`d)` Test via Browser 
+`d)` Go back to the DNS Load Balancer tab and activate the new DNS Load Balancer service by selecting **Activate** button:
 
-   `1.` Copy the LBR name from **Load balanced record properties** and paste into your browser.   
+.. figure:: _figures/104.png
 
-   .. figure:: _figures/105.png 
+Status will be updated a few seconds later.
+
+`e)` Test via Browser
+
+   `1.` Open FQDN ("auction.{{zone name}}" where {{zone name}} is the value copied from postman in one of the step above) in your browser.
+
+   .. figure:: _figures/105.png
 
    `2.` You will see that acc to the proximity rule and pool members, you will get to endpoints belonging to the **america** pool in a round-robin manner. 
 
@@ -751,7 +752,7 @@ F5 DNS Load Balancer Cloud Service - API
 1. Create DNS Load Balancer Subscription
 ***************************
 
-Select the **Create GSLB Subscription** request and click **Send** to create a new service instance of DNS Load Balancer using “account_id” and “catalog_id” retrieved a few steps above. 
+Select the **Create GSLB Subscription** request and click **Send** to create a new service instance of DNS Load Balancer using “account_id” and “catalog_id” retrieved a few steps above.
 
 .. figure:: _figures/95.jpg 
 
@@ -765,14 +766,14 @@ The retrieved "subscription_id" is then stored for subsequent calls.
 
 .. figure:: _figures/47.jpg 
 
-You can change its status from "DISABLED” to “ACTIVE” sending the **Activate GSLB Subscription** request below. 
+You can change its status from "DISABLED” to “ACTIVE” sending the **Activate GSLB Subscription** request below.
 
 More detailed information on this API request can be found `here <http://bit.ly/36fvHLX>`_.  
 
 2. Activate DNS Load Balancer Subscription
 *************************************************
 
-Select the **Activate GSLB Subscription** request and click **Send**. This will deploy DNS Load Balancer using “subscription_id” captured in one of the steps above. 
+Select the **Activate GSLB Subscription** request and click **Send**. This will deploy DNS Load Balancer using “subscription_id” captured in one of the steps above.
 
 .. figure:: _figures/49.jpg 
 
