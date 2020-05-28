@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6b729533-a33d-4298-bf23-e198d57ad33d",
+		"_postman_id": "fefffac4-0ed8-402a-bd9f-ac3bd8c80a43",
 		"name": "F5 Cloud Services DNS LAB",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,7 +14,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "001c4fe5-6979-49d2-9d9b-059b15f0591c",
+								"id": "e1eeb015-1457-47c6-9821-178189b49e9c",
 								"exec": [
 									"pm.test(\"Set token variable\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -64,7 +64,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "6ecfe359-0fd4-4695-aa33-883a0907e860",
+								"id": "a979ec97-0b2c-462d-8c87-9b1ab65da2dc",
 								"exec": [
 									"pm.test(\"Set account_id variable\", function () {",
 									"    var jsonData = pm.response.json();",
@@ -115,7 +115,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "84b468de-bda4-4da1-ac8d-8ae63ae0a12b",
+								"id": "59730f1e-5bde-4a8c-b0d2-1b6051b0a506",
 								"exec": [
 									"pm.test(\"Set account_id and user_id variables\", function () {",
 									"    var jsonData = pm.response.json();",
@@ -160,7 +160,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "14f28fd5-ab51-48eb-87fc-7bff40a88a21",
+								"id": "73fddb4a-bab5-464b-bde1-e68ff96e92a5",
 								"exec": [
 									"pm.test(\"Get User's DNS Zone Name\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -206,7 +206,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "efba8086-61cb-4775-9674-27c4d2473b1d",
+								"id": "f3c764c6-4dec-4825-8ddf-1bc3f6059410",
 								"exec": [
 									"pm.test(\"Switch account\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -253,7 +253,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "6664fa48-b93f-46b1-91b2-c23169c20a06",
+								"id": "0a5b7f40-d71d-4ca2-9ed4-0847bd9847b5",
 								"exec": [
 									"pm.test(\"Set Catalog variables\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -306,7 +306,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "12b7415f-af22-480d-aec0-44723f68e515",
+								"id": "c1a2771a-988c-48bc-b7c2-244c648a0595",
 								"exec": [
 									"pm.test(\"Find previously created subscriptions\", function() {",
 									"    const jsonData = pm.response.json();",
@@ -378,7 +378,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "ad2ef6bf-5837-4559-95c1-9fc15f6e60d1",
+								"id": "74ac3e41-6d6e-45a1-9553-c678a7045cb4",
 								"exec": [
 									"pm.test(\"Set DNS subscription id variable\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -468,7 +468,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "4577981d-4813-4680-bf95-e84de4cc2c5d",
+								"id": "7e340055-7491-40b3-bc4a-3078e39ee4ef",
 								"exec": [
 									""
 								],
@@ -514,7 +514,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e4784ec8-37c3-460e-bc13-b320f5ba58fd",
+								"id": "fda2955e-dcc3-4def-ad70-2883406bf2cb",
 								"exec": [
 									""
 								],
@@ -565,7 +565,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "65202952-4bb1-460e-b8c9-f3477bc8efd7",
+								"id": "939ada61-2496-46d1-b32a-d9f7dda09f39",
 								"exec": [
 									"pm.test(\"Set GSLB subscription id variable\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -703,7 +703,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"subscription_id\": \"{{GSLB_SUBSCRIPTION_ID}}\",\n  \"account_id\": \"{{ACCOUNT_ID}}\",\n  \"catalog_id\": \"{{GSLB_CATALOG_ID}}\",\n  \"service_instance_name\": \"{{ZONE_NAME}}\",\n  \"configuration\": {\n    \"gslb_service\": {\n      \"zone\": \"{{ZONE_NAME}}\",\n      \"load_balanced_records\": {\n        \"lbrs_auction\": {\n          \"aliases\": [\n            \"auction\"\n          ],\n          \"display_name\": \"auction.{{ZONE_NAME}}\",\n          \"enable\": true,\n          \"persistence\": false,\n          \"proximity_rules\": [\n            {\n              \"pool\": \"pools_usa\",\n              \"region\": \"global\",\n              \"score\": 1\n            },\n            {\n              \"pool\": \"pools_europe\",\n              \"region\": \"global\",\n              \"score\": 1\n            },\n            {\n              \"pool\": \"pools_australia\",\n              \"region\": \"global\",\n              \"score\": 1\n            }\n          ],\n          \"rr_type\": \"A\"\n        }\n      },\n      \"pools\": {\n        \"pools_usa\": {\n          \"display_name\": \"usa\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na1_auction\"\n            },\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na2_auction\"\n            },\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na3_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        },\n        \"pools_europe\": {\n          \"display_name\": \"europe\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_eu_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        },\n        \"pools_australia\": {\n          \"display_name\": \"australia\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_au_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        }\n      },\n      \"virtual_servers\": {\n        \"ipEndpoint_na1_auction\": {\n          \"address\": \"34.229.48.248\",\n          \"display_name\": \"na1-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_eu_auction\": {\n          \"address\": \"3.122.191.227\",\n          \"display_name\": \"eu-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_na2_auction\": {\n          \"address\": \"18.232.64.254\",\n          \"display_name\": \"na2-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_na3_auction\": {\n          \"address\": \"13.82.106.211\",\n          \"display_name\": \"na3-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_au_auction\": {\n          \"address\": \"54.206.13.195\",\n          \"display_name\": \"au-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        }\n      }\n    }\n  }\n}"
+							"raw": "{\n  \"subscription_id\": \"{{GSLB_SUBSCRIPTION_ID}}\",\n  \"account_id\": \"{{ACCOUNT_ID}}\",\n  \"catalog_id\": \"{{GSLB_CATALOG_ID}}\",\n  \"service_instance_name\": \"{{ZONE_NAME}}\",\n  \"configuration\": {\n    \"gslb_service\": {\n      \"zone\": \"{{ZONE_NAME}}\",\n      \"load_balanced_records\": {\n        \"lbrs_auction\": {\n          \"aliases\": [\n            \"auction\"\n          ],\n          \"display_name\": \"auction\",\n          \"enable\": true,\n          \"persistence\": false,\n          \"proximity_rules\": [\n            {\n              \"pool\": \"pools_usa\",\n              \"region\": \"global\",\n              \"score\": 1\n            },\n            {\n              \"pool\": \"pools_europe\",\n              \"region\": \"global\",\n              \"score\": 1\n            },\n            {\n              \"pool\": \"pools_australia\",\n              \"region\": \"global\",\n              \"score\": 1\n            }\n          ],\n          \"rr_type\": \"A\"\n        }\n      },\n      \"pools\": {\n        \"pools_usa\": {\n          \"display_name\": \"usa\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na1_auction\"\n            },\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na2_auction\"\n            },\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na3_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        },\n        \"pools_europe\": {\n          \"display_name\": \"europe\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_eu_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        },\n        \"pools_australia\": {\n          \"display_name\": \"australia\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_au_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        }\n      },\n      \"virtual_servers\": {\n        \"ipEndpoint_na1_auction\": {\n          \"address\": \"34.229.48.248\",\n          \"display_name\": \"na1-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_eu_auction\": {\n          \"address\": \"3.122.191.227\",\n          \"display_name\": \"eu-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_na2_auction\": {\n          \"address\": \"18.232.64.254\",\n          \"display_name\": \"na2-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_na3_auction\": {\n          \"address\": \"13.82.106.211\",\n          \"display_name\": \"na3-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_au_auction\": {\n          \"address\": \"54.206.13.195\",\n          \"display_name\": \"au-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        }\n      }\n    }\n  }\n}"
 						},
 						"url": {
 							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{GSLB_SUBSCRIPTION_ID}}",
@@ -775,7 +775,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"subscription_id\": \"{{GSLB_SUBSCRIPTION_ID}}\",\n  \"account_id\": \"{{ACCOUNT_ID}}\",\n  \"catalog_id\": \"{{GSLB_CATALOG_ID}}\",\n  \"service_instance_name\": \"{{ZONE_NAME}}\",\n  \"configuration\": {\n    \"gslb_service\": {\n      \"zone\": \"{{ZONE_NAME}}\",\n      \"load_balanced_records\": {\n        \"lbrs_auction\": {\n          \"aliases\": [\n            \"auction\"\n          ],\n          \"display_name\": \"auction.{{ZONE_NAME}}\",\n          \"enable\": true,\n          \"persistence\": false,\n          \"proximity_rules\": [\n            {\n              \"pool\": \"pools_usa\",\n              \"region\": \"regions_usa\",\n              \"score\": 1\n            },\n            {\n              \"pool\": \"pools_europe\",\n              \"region\": \"regions_europe\",\n              \"score\": 50\n            },\n            {\n              \"pool\": \"pools_australia\",\n              \"region\": \"regions_australia\",\n              \"score\": 50\n            }\n          ],\n          \"rr_type\": \"A\"\n        }\n      },\n      \"pools\": {\n        \"pools_usa\": {\n          \"display_name\": \"usa\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na1_auction\"\n            },\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na2_auction\"\n            },\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na3_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        },\n        \"pools_europe\": {\n          \"display_name\": \"europe\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_eu_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        },\n        \"pools_australia\": {\n          \"display_name\": \"australia\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_au_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        }\n      },\n      \"regions\": {\n        \"regions_europe\": {\n          \"display_name\": \"europe\",\n          \"sectors\": [\n            {\n              \"code\": \"EU\",\n              \"scale\": \"continent\"\n            }\n          ]\n        },\n        \"regions_usa\": {\n          \"display_name\": \"usa\",\n          \"sectors\": [\n            {\n              \"code\": \"NA\",\n              \"scale\": \"continent\"\n            }\n          ]\n        },\n        \"regions_australia\": {\n          \"display_name\": \"australia\",\n          \"sectors\": [\n            {\n              \"code\": \"AU\",\n              \"scale\": \"continent\"\n            }\n          ]\n        }\n      },\n      \"virtual_servers\": {\n         \"ipEndpoint_na1_auction\": {\n          \"address\": \"34.229.48.248\",\n          \"display_name\": \"na1-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_eu_auction\": {\n          \"address\": \"3.122.191.227\",\n          \"display_name\": \"eu-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_na2_auction\": {\n          \"address\": \"18.232.64.254\",\n          \"display_name\": \"na2-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_na3_auction\": {\n          \"address\": \"13.82.106.211\",\n          \"display_name\": \"na3-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_au_auction\": {\n          \"address\": \"54.206.13.195\",\n          \"display_name\": \"au-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        }\n      },\n      \"regions\": {\n        \"regions_europe\": {\n          \"display_name\": \"europe\",\n          \"sectors\": [\n            {\n              \"code\": \"EU\",\n              \"scale\": \"continent\"\n            }\n          ]\n        },\n        \"regions_australia\": {\n          \"display_name\": \"australia\",\n          \"sectors\": [\n            {\n              \"scale\": \"continent\",\n              \"code\": \"OC\"\n            }\n          ]\n        },\n        \"regions_usa\": {\n          \"display_name\": \"usa\",\n          \"sectors\": [\n            {\n              \"code\": \"NA\",\n              \"scale\": \"continent\"\n            }\n          ]\n        }\n      }\n    }\n  },\n  \"service_type\": \"gslb\"\n}"
+							"raw": "{\n  \"subscription_id\": \"{{GSLB_SUBSCRIPTION_ID}}\",\n  \"account_id\": \"{{ACCOUNT_ID}}\",\n  \"catalog_id\": \"{{GSLB_CATALOG_ID}}\",\n  \"service_instance_name\": \"{{ZONE_NAME}}\",\n  \"configuration\": {\n    \"gslb_service\": {\n      \"zone\": \"{{ZONE_NAME}}\",\n      \"load_balanced_records\": {\n        \"lbrs_auction\": {\n          \"aliases\": [\n            \"auction\"\n          ],\n          \"display_name\": \"auction\",\n          \"enable\": true,\n          \"persistence\": false,\n          \"proximity_rules\": [\n            {\n              \"pool\": \"pools_usa\",\n              \"region\": \"regions_usa\",\n              \"score\": 1\n            },\n            {\n              \"pool\": \"pools_europe\",\n              \"region\": \"regions_europe\",\n              \"score\": 50\n            },\n            {\n              \"pool\": \"pools_australia\",\n              \"region\": \"regions_australia\",\n              \"score\": 50\n            }\n          ],\n          \"rr_type\": \"A\"\n        }\n      },\n      \"pools\": {\n        \"pools_usa\": {\n          \"display_name\": \"usa\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na1_auction\"\n            },\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na2_auction\"\n            },\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_na3_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        },\n        \"pools_europe\": {\n          \"display_name\": \"europe\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_eu_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        },\n        \"pools_australia\": {\n          \"display_name\": \"australia\",\n          \"enable\": true,\n          \"load_balancing_mode\": \"round-robin\",\n          \"max_answers\": 1,\n          \"members\": [\n            {\n              \"final\": null,\n              \"monitor\": \"basic\",\n              \"virtual_server\": \"ipEndpoint_au_auction\"\n            }\n          ],\n          \"remark\": \"\",\n          \"rr_type\": \"A\",\n          \"ttl\": 30\n        }\n      },\n      \"regions\": {\n        \"regions_europe\": {\n          \"display_name\": \"europe\",\n          \"sectors\": [\n            {\n              \"code\": \"EU\",\n              \"scale\": \"continent\"\n            }\n          ]\n        },\n        \"regions_usa\": {\n          \"display_name\": \"usa\",\n          \"sectors\": [\n            {\n              \"code\": \"NA\",\n              \"scale\": \"continent\"\n            }\n          ]\n        },\n        \"regions_australia\": {\n          \"display_name\": \"australia\",\n          \"sectors\": [\n            {\n              \"code\": \"AU\",\n              \"scale\": \"continent\"\n            }\n          ]\n        }\n      },\n      \"virtual_servers\": {\n         \"ipEndpoint_na1_auction\": {\n          \"address\": \"34.229.48.248\",\n          \"display_name\": \"na1-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_eu_auction\": {\n          \"address\": \"3.122.191.227\",\n          \"display_name\": \"eu-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_na2_auction\": {\n          \"address\": \"18.232.64.254\",\n          \"display_name\": \"na2-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_na3_auction\": {\n          \"address\": \"13.82.106.211\",\n          \"display_name\": \"na3-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        },\n        \"ipEndpoint_au_auction\": {\n          \"address\": \"54.206.13.195\",\n          \"display_name\": \"au-auction\",\n          \"monitor\": \"none\",\n          \"port\": 80\n        }\n      },\n      \"regions\": {\n        \"regions_europe\": {\n          \"display_name\": \"europe\",\n          \"sectors\": [\n            {\n              \"code\": \"EU\",\n              \"scale\": \"continent\"\n            }\n          ]\n        },\n        \"regions_australia\": {\n          \"display_name\": \"australia\",\n          \"sectors\": [\n            {\n              \"scale\": \"continent\",\n              \"code\": \"OC\"\n            }\n          ]\n        },\n        \"regions_usa\": {\n          \"display_name\": \"usa\",\n          \"sectors\": [\n            {\n              \"code\": \"NA\",\n              \"scale\": \"continent\"\n            }\n          ]\n        }\n      }\n    }\n  },\n  \"service_type\": \"gslb\"\n}"
 						},
 						"url": {
 							"raw": "https://{{HOSTNAME}}/{{API_VERSION}}/svc-subscription/subscriptions/{{GSLB_SUBSCRIPTION_ID}}",
@@ -834,7 +834,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e5c6b148-f1f4-4f5b-9fac-ecca3e7df211",
+								"id": "ff7cfaf3-dda8-46e0-8f03-9509571e78a8",
 								"exec": [
 									""
 								],
@@ -885,7 +885,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f515c6ea-79c6-4e14-b4a6-eb5d07a147a4",
+								"id": "787ce420-9e76-41f6-b150-71a407ede9de",
 								"exec": [
 									""
 								],
@@ -935,7 +935,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f6340fd5-6d71-401a-aa5f-5ad0d35f06f0",
+								"id": "ade23d8b-0d0a-418f-a70b-cb7edba0e426",
 								"exec": [
 									""
 								],
@@ -1010,7 +1010,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f650a1d1-238f-466b-a62e-d665ca2b2239",
+								"id": "65d82cfb-3edd-4471-8a27-f994abde09a3",
 								"exec": [
 									"pm.test(\"Reset token variable\", function() {",
 									"    pm.environment.set(\"ACCESS_TOKEN\", \"\");",
