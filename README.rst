@@ -733,7 +733,8 @@ Go back to the newly created Load-balancing service to see the newly created rec
 
    .. figure:: _figures/106.png
    
-`e)` Delete LB Record 
+6. Delete DNS Load Balancer Service
+******************************************
 
    `1.` Go back to the F5 Cloud Services portal, the **DNS Load Balancer** tab, and click on your load-balancing service.  
    
@@ -742,6 +743,7 @@ Go back to the newly created Load-balancing service to see the newly created rec
    `2.` Tick the record you want to delete, click **Delete** and confirm your choice. 
    
    .. figure:: _figures/108.png
+
 
 F5 DNS Load Balancer Cloud Service - API
 #######################
@@ -872,6 +874,17 @@ And another section provides information on "virtual_servers": their IP endpoint
 
 .. figure:: _figures/113.png
 
+9. Delete DNS Load Balancer Service
+******************
+
+Send the **Retire GSLB Subscription** request which uses the relevant “subscription_id”.
+
+.. figure:: _figures/81.jpg
+
+You will see “retired” status in the response body which means that it’s not available on the F5 Cloud Services portal anymore.
+
+.. figure:: _figures/80.jpg
+
 Clean Up
 ########
 
@@ -894,33 +907,6 @@ In order to delete DNS Load Balancer instance, go to the **DNS Load Balancer** t
    
 `2.` Clean Up via Postman
 *************************
-
-`a)` Delete DNS
-
-Send the **Retire DNS Subscription** request which uses the relevant “subscription_id”.
-
-.. figure:: _figures/79.jpg
-   
-You will see “retired” status in the response body which means that it’s not available on the F5 Cloud Services portal anymore.
-
-.. figure:: _figures/80.jpg
-
-More detailed information on these API requests can be found `here <http://bit.ly/2Gf166I>`_. 
-
-`b)` Delete DNS Load Balancer Service
-
-Send the **Retire GSLB Subscription** request which uses the relevant “subscription_id”.
-
-.. figure:: _figures/81.jpg
-
-You will see “retired” status in the response body which means that it’s not available on the F5 Cloud Services portal anymore.
-
-.. figure:: _figures/80.jpg
-   
-More detailed information on these API requests can be found `here <http://bit.ly/2Gf166I>`_. 
-   
-`3.` Clear Tokens from the Lab Service API
-************************
 
 Send the **Retire DNS Zone** to remove or reset zone file. You will get response with status code "200 OK".
 
