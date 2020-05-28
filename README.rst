@@ -140,9 +140,13 @@ Open the Opera browser, click **Settings**,  **Advanced**, **Features** and then
 
 `a)` Download Postman `here <http://bit.ly/309wSLl>`_, open it, create a Postman account if you don’t have one and choose to do so, and sign in. 
 
-`b)` Import collection – **F5 Cloud Services DNS LAB.postman_collection.json** and environment – **F5 Cloud Services DNS LAB.postman_environment.json**. 
+`b)` Clone or download and extract the repository
 
-.. figure:: _figures/1.jpg 
+.. figure:: _figures/120.png
+
+`c)` Import collection – **/postman/F5 Cloud Services DNS LAB.postman_collection.json** and environment – **/postman/F5 Cloud Services DNS LAB.postman_environment.json**.
+
+.. figure:: _figures/121.png
 
 You will now see the imported collection (left side) with the calls that you will be utilizing grouped into several categories, as well as the environment variables (top right) used to store and pass data between Postman and the API.     
 
