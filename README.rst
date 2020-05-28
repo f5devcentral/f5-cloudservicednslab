@@ -241,7 +241,7 @@ Let’s now return to the F5 Cloud Services portal and create Secondary DNS Zone
 
 .. figure:: _figures/10.png 
 
-`b)` Paste **Zone name** retrieved in step 4.d) above and indicate the following DNS IP: **54.211.12.173** as the DNS Primary Server IP. Other values are optional. Then click **Get Zone File**.   
+`b)` Paste **Zone name** retrieved in step 4.e) above and indicate the following DNS IP: **54.211.12.173** as the DNS Primary Server IP. Other values are optional. Then click **Get Zone File**.
 
 .. figure:: _figures/11.png  
 
