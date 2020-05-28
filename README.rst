@@ -649,7 +649,7 @@ Now let’s test the new proximity rule. This can be done either via the Opera b
 
    .. figure:: _figures/50.png 
 
-   `2.` Let’s now test the EU proximity rule. Click **VPN** and select **Europe**. This will simulate your entering http://auction.cloudservicesdemo.net/ from Europe.  
+   `2.` Let’s now test the EU proximity rule. Click **VPN** and select **Europe**. This will simulate your entering BuyTime Website from Europe.
 
    .. figure:: _figures/8.png 
 
