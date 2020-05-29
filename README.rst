@@ -730,11 +730,11 @@ Status will be updated a few seconds later.
 
 `e)` Test via Browser
 
-   `1.` Open FQDN ("auction.{{zone name}}" where {{zone name}} is the value copied from postman in one of the step above) in your browser.
+   `1.` Open FQDN ("auction.{{zone-2 name}}" where {{zone-2 name}} is the value copied from postman in one of the step above) in your browser.
 
-   .. figure:: _figures/29.png
+   .. figure:: _figures/123.png
 
-   `2.` You will see that acc to the proximity rule and pool members, you will get to endpoints belonging to the **america** pool in a round-robin manner. 
+   `2.` You will see that acc to the proximity rule and pool members, you will get to endpoints belonging to the **closest** pool in a round-robin manner.
 
    .. figure:: _figures/106.png
    
@@ -745,7 +745,7 @@ Status will be updated a few seconds later.
    
    .. figure:: _figures/107.png
    
-   `2.` Tick the record you want to delete, click **Delete** and confirm your choice. 
+   `2.` Tick the records and click **Delete**, then confirm your choice.
    
    .. figure:: _figures/108.png
 
