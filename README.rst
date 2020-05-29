@@ -140,9 +140,13 @@ Open the Opera browser, click **Settings**,  **Advanced**, **Features** and then
 
 `a)` Download Postman `here <http://bit.ly/309wSLl>`_, open it, create a Postman account if you don’t have one and choose to do so, and sign in. 
 
-`b)` Import collection – **F5 Cloud Services DNS LAB.postman_collection.json** and environment – **F5 Cloud Services DNS LAB.postman_environment.json**. 
+`b)` Clone or download and extract the repository
 
-.. figure:: _figures/1.jpg 
+.. figure:: _figures/120.png
+
+`c)` Import collection – **/postman/F5 Cloud Services DNS LAB.postman_collection.json** and environment – **/postman/F5 Cloud Services DNS LAB.postman_environment.json**.
+
+.. figure:: _figures/121.png
 
 You will now see the imported collection (left side) with the calls that you will be utilizing grouped into several categories, as well as the environment variables (top right) used to store and pass data between Postman and the API.     
 
@@ -237,7 +241,7 @@ Let’s now return to the F5 Cloud Services portal and create Secondary DNS Zone
 
 .. figure:: _figures/10.png 
 
-`b)` Paste **Zone name** retrieved in step 4.d) above and indicate the following DNS IP: **54.211.12.173** as the DNS Primary Server IP. Other values are optional. Then click **Get Zone File**.   
+`b)` Paste **Zone name** retrieved in step 4.e) above and indicate the following DNS IP: **54.211.12.173** as the DNS Primary Server IP. Other values are optional. Then click **Get Zone File**.
 
 .. figure:: _figures/11.png  
 
@@ -398,11 +402,13 @@ In this section we will use the F5 Cloud Services UI to set up the Load Balancer
 Let’s now create DNS Load Balancer Service to be able to balance loads across multiple clouds (Azure & AWS) and provide global availability and performance with health-check and built-in DDoS protection. 
 
 `a)` Go to the **DNS Load Balancer** tab and click **Create**. 
-  
+
 .. figure:: _figures/16.png 
 
-`b)` Enter name of the zone we created above and click **Create**.  
-  
+`b)` Enter name of the zone we `created before <#zone-name>`_ and click **Create**.  
+
+.. figure:: _figures/27.jpg 
+
 .. figure:: _figures/17.png 
    
 Your DNS Load Balancer instance will appear on the list but in **Inactive** status. You can change the status after creating load balanced record and pool.
@@ -476,19 +482,19 @@ Let's now create a pool and add a member to it.
 
 After creating all the components (IP endpoint, Pool, Region and Monitor), we can create a DNS Load Balancer record and its     proximity rule. 
 
-   `1.` Copy “zone name” from the **DNS** service we've created several steps above: 
+   `1.` Go to the **Load balanced records** tab and then click **Create**.
 
-   .. figure:: _figures/77.png 
+   .. figure:: _figures/118.png
 
-   `2.` Go back to the **DNS Load Balancer** tab, click on your service and then **Load balanced records**. Click **Create**. 
-   
-   .. figure:: _figures/28.png 
+   `2.` Fill in LBR name "auction", host "auction", select "A" as "Resource Record Type" and set a proximity rule ("Anywhere" -> "america" pool) to direct requests from anywhere to "america" pool with the created NA1 endpoint. Set score of the proximity rule to be "1". This will define the priority of the rule after some more are added.
 
-   Fill in LBR name ("auction.”zone name”", where “zone name” is the value copied in one of the step above), host ("auction"), select "A" as "Resource Record Type" and set a proximity rule ("Anywhere" -> "america" pool) to direct requests from anywhere to "america" pool with the created NA1 endpoint. Set score of the proximity rule to be "1". This will define the priority of the rule after some more are added.  
+   Click **Add Rule**, then check ***Enabled*** tick and **Save** the record.
 
-   Click **Add Rule** and **Save** the record. 
+   .. figure:: _figures/78.png
 
-   .. figure:: _figures/78.png 
+   `3.` Go back to the DNS Load Balancer tab, click on your service and activate it.
+
+   .. figure:: _figures/119.png
 
    The DNS Load Balancer service is now setup.  
 
@@ -496,7 +502,7 @@ After creating all the components (IP endpoint, Pool, Region and Monitor), we ca
 
 Let’s test the created service with the proximity rule via browser.  
 
-   `1.` Copy LBR name in **Load balanced record properties** and paste into your browser.   
+   `1.` Open FQDN ("auction.{{zone name}}" where {{zone name}} is the value copied from postman in one of the step above) in your browser.
 
    .. figure:: _figures/29.png 
 
@@ -513,7 +519,7 @@ Another way to test the new proximity rule is via **Command Prompt**.
 
    .. figure:: _figures/70.png 
 
-   `2.` Paste the following command to the **Command Prompt**: **nslookup "your LBR name"** and press **Enter**. 
+   `2.` Paste the following command to the **Command Prompt**: **nslookup "your FQDN name"** and press **Enter**.
 
    .. figure:: _figures/68.png 
 
@@ -560,7 +566,7 @@ Let's now add the newly created endpoints to the existing pool.
 
 Let’s test the updated pool with the new endpoints via browser.  
 
-   `1.` Copy LBR name in **Load balanced record properties** and paste into your browser.   
+   `1.` Open FQDN ("auction.{{zone name}}" where {{zone name}} is the value copied from postman in one of the step above) in your browser.
 
    .. figure:: _figures/29.png 
 
@@ -609,7 +615,7 @@ Let's now create a pool and add a member to it.
 
    `1.` Go to the **Pools** tab and then click **Create**. 
   
-   .. figure:: _figures/24.png 
+   .. figure:: _figures/122.png
 
    `2.` Fill in "europe" name, choose "round-robin" method and define TTL "30". Then click **Next**.  
   
@@ -639,11 +645,11 @@ Click **Add Rule** and **Save** the record. The new proximity rule will direct r
 
 Now let’s test the new proximity rule. This can be done either via the Opera browser or via your computer’s **Command Prompt** (see the next section).  
 
-   `1.` Open the Opera browser, copy LBR name (“auction."your zone name"”) in **Load balanced record properties** and paste into your browser. You will get to one of three available IP endpoints of the “america” pool.  
+   `1.` Open the Opera browser, copy FQDN name (“auction."your zone name"”) in **Load balanced record properties** and paste into your browser. You will get to one of three available IP endpoints of the “america” pool.
 
    .. figure:: _figures/50.png 
 
-   `2.` Let’s now test the EU proximity rule. Click **VPN** and select **Europe**. This will simulate your entering http://auction.cloudservicesdemo.net/ from Europe.  
+   `2.` Let’s now test the EU proximity rule. Click **VPN** and select **Europe**. This will simulate your entering BuyTime Website from Europe.
 
    .. figure:: _figures/8.png 
 
@@ -704,12 +710,7 @@ Let's now create a new Load-balancing service via UI to copy the record to. To d
    Paste "zone2" name which you copied in step 1 above and click **Create**.  
 
    .. figure:: _figures/86.png 
-   
-   `4.` Activate the new DNS Load Balancer service by selecting **Activate** from the dropdown menu:
 
-   .. figure:: _figures/104.png 
-
-   Its status will be updated a few seconds later. 
 
 `c)` Update JSON 
 
@@ -721,25 +722,33 @@ Click on your newly created service and open the **JSON configuration** tab. Pas
 
 Go back to the newly created Load-balancing service to see the newly created record which is the copy of the original one.  
 
-`d)` Test via Browser 
+`d)` Go back to the DNS Load Balancer tab and activate the new DNS Load Balancer service by selecting **Activate** button:
 
-   `1.` Copy the LBR name from **Load balanced record properties** and paste into your browser.   
+.. figure:: _figures/104.png
 
-   .. figure:: _figures/105.png 
+Status will be updated a few seconds later.
 
-   `2.` You will see that acc to the proximity rule and pool members, you will get to endpoints belonging to the **america** pool in a round-robin manner. 
+`e)` Test via Browser
+
+   `1.` Open FQDN ("auction.{{zone-2 name}}" where {{zone-2 name}} is the value copied from postman in one of the step above) in your browser.
+
+   .. figure:: _figures/123.png
+
+   `2.` You will see that acc to the proximity rule and pool members, you will get to endpoints belonging to the **closest** pool in a round-robin manner.
 
    .. figure:: _figures/106.png
    
-`e)` Delete LB Record 
+6. Delete DNS Load Balancer Service
+******************************************
 
    `1.` Go back to the F5 Cloud Services portal, the **DNS Load Balancer** tab, and click on your load-balancing service.  
    
    .. figure:: _figures/107.png
    
-   `2.` Tick the record you want to delete, click **Delete** and confirm your choice. 
+   `2.` Tick the records and click **Delete**, then confirm your choice.
    
    .. figure:: _figures/108.png
+
 
 F5 DNS Load Balancer Cloud Service - API
 #######################
@@ -747,7 +756,7 @@ F5 DNS Load Balancer Cloud Service - API
 1. Create DNS Load Balancer Subscription
 ***************************
 
-Select the **Create GSLB Subscription** request and click **Send** to create a new service instance of DNS Load Balancer using “account_id” and “catalog_id” retrieved a few steps above. 
+Select the **Create GSLB Subscription** request and click **Send** to create a new service instance of DNS Load Balancer using “account_id” and “catalog_id” retrieved a few steps above.
 
 .. figure:: _figures/95.jpg 
 
@@ -761,14 +770,14 @@ The retrieved "subscription_id" is then stored for subsequent calls.
 
 .. figure:: _figures/47.jpg 
 
-You can change its status from "DISABLED” to “ACTIVE” sending the **Activate GSLB Subscription** request below. 
+You can change its status from "DISABLED” to “ACTIVE” sending the **Activate GSLB Subscription** request below.
 
 More detailed information on this API request can be found `here <http://bit.ly/36fvHLX>`_.  
 
 2. Activate DNS Load Balancer Subscription
 *************************************************
 
-Select the **Activate GSLB Subscription** request and click **Send**. This will deploy DNS Load Balancer using “subscription_id” captured in one of the steps above. 
+Select the **Activate GSLB Subscription** request and click **Send**. This will deploy DNS Load Balancer using “subscription_id” captured in one of the steps above.
 
 .. figure:: _figures/49.jpg 
 
@@ -870,42 +879,8 @@ And another section provides information on "virtual_servers": their IP endpoint
 
 .. figure:: _figures/113.png
 
-Clean Up
-########
-
-At this point feel free to explore and repeat any of the previous steps of the lab, but should you want to clean up the resources you've created and remove your services, then choose the way to do so (via Postman or the F5 Cloud Services portal) and follow the steps below. 
-
-`1.` Clean Up via the F5 Cloud Services Portal
-******************************************
-
-`a)` Delete DNS  
-
-In order to delete DNS instance, go to the **DNS** tab, tick your zone and then click **Delete**. Now just confirm the choice. 
-
-.. figure:: _figures/54.png 
-
-`b)` Delete DNS Load Balancer Service  
-
-In order to delete DNS Load Balancer instance, go to the **DNS Load Balancer** tab, tick your service and then click **Delete**. Now just confirm the choice. 
-
-.. figure:: _figures/55.png 
-   
-`2.` Clean Up via Postman
-*************************
-
-`a)` Delete DNS
-
-Send the **Retire DNS Subscription** request which uses the relevant “subscription_id”.
-
-.. figure:: _figures/79.jpg
-   
-You will see “retired” status in the response body which means that it’s not available on the F5 Cloud Services portal anymore.
-
-.. figure:: _figures/80.jpg
-
-More detailed information on these API requests can be found `here <http://bit.ly/2Gf166I>`_. 
-
-`b)` Delete DNS Load Balancer Service
+9. Delete DNS Load Balancer Service
+******************
 
 Send the **Retire GSLB Subscription** request which uses the relevant “subscription_id”.
 
@@ -914,11 +889,9 @@ Send the **Retire GSLB Subscription** request which uses the relevant “subscri
 You will see “retired” status in the response body which means that it’s not available on the F5 Cloud Services portal anymore.
 
 .. figure:: _figures/80.jpg
-   
-More detailed information on these API requests can be found `here <http://bit.ly/2Gf166I>`_. 
-   
-`3.` Clear Tokens from the Lab Service API
-************************
+
+Clean Up
+########
 
 Send the **Retire DNS Zone** to remove or reset zone file. You will get response with status code "200 OK".
 
