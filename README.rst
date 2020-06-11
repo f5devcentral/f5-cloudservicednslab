@@ -3,17 +3,6 @@ LAB: F5 DNS Cloud Service & F5 DNS Load Balancer Cloud Service
 
 .. contents:: Table of Contents 
 
-
-
-INSTRUCTIONS FOR F5 AGILITY (Virtual) ATTENDEES on JUNE 10, 2020
-################################################################
-
-Please open a version of this lab customized *specifically* for Agility in `this Cloud Docs Repository <https://clouddocs.f5.com/training/community/dns/html/class6/class6.html>`_.
-
-For the F5 Agility Lab session we recommend that you utilize the `F5 Unified Demo Environment (UDF) session/course titled "SaaS based DNS and DNS Load Balancing" <https://udf.f5.com/meet/e6c00ed0-5216-430f-aabd-a5c82639a3d3/3ee19b00-ef29-44f0-bb62-9497178083ac>`_. This provides a Windows VM  with all of the required software pre-installed. However, using the UDF environment is **not required**, especially if you already have Postman and your own VPN solution (or Opera browser) on your computer.
-
-Should you have any questions during the lab please join the Zoom meeting with the link provided by the Agility team. Now... on to the lab!
-
 Introduction 
 ############
 
