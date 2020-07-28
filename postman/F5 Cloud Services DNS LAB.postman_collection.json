@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fefffac4-0ed8-402a-bd9f-ac3bd8c80a43",
+		"_postman_id": "2cb2e604-4313-43be-b8f7-bd4b07e760fd",
 		"name": "F5 Cloud Services DNS LAB",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,7 +14,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e1eeb015-1457-47c6-9821-178189b49e9c",
+								"id": "8f8474e1-365f-4b5b-bcbc-270967fe9604",
 								"exec": [
 									"pm.test(\"Set token variable\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -64,7 +64,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a979ec97-0b2c-462d-8c87-9b1ab65da2dc",
+								"id": "13deff5b-5493-43d7-8b56-5c13f6319dca",
 								"exec": [
 									"pm.test(\"Set account_id variable\", function () {",
 									"    var jsonData = pm.response.json();",
@@ -115,7 +115,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "59730f1e-5bde-4a8c-b0d2-1b6051b0a506",
+								"id": "65dfe3a9-6136-492f-852e-d89b8c0811f5",
 								"exec": [
 									"pm.test(\"Set account_id and user_id variables\", function () {",
 									"    var jsonData = pm.response.json();",
@@ -160,7 +160,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "73fddb4a-bab5-464b-bde1-e68ff96e92a5",
+								"id": "d2701849-b9fc-4237-b9f7-a90f8708bd41",
 								"exec": [
 									"pm.test(\"Get User's DNS Zone Name\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -185,6 +185,11 @@
 								"key": "Authorization",
 								"type": "text",
 								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Labid",
+								"value": "dnslab",
+								"type": "text"
 							}
 						],
 						"url": {
@@ -206,7 +211,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f3c764c6-4dec-4825-8ddf-1bc3f6059410",
+								"id": "19ab18f0-19e0-4377-a43a-dad6b77ee379",
 								"exec": [
 									"pm.test(\"Switch account\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -253,7 +258,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0a5b7f40-d71d-4ca2-9ed4-0847bd9847b5",
+								"id": "c1df84a5-27c2-4abd-aaf2-1dcbc969188d",
 								"exec": [
 									"pm.test(\"Set Catalog variables\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -306,7 +311,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "c1a2771a-988c-48bc-b7c2-244c648a0595",
+								"id": "9a26a8fc-3b31-41b6-8394-807485e0b919",
 								"exec": [
 									"pm.test(\"Find previously created subscriptions\", function() {",
 									"    const jsonData = pm.response.json();",
@@ -378,7 +383,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "74ac3e41-6d6e-45a1-9553-c678a7045cb4",
+								"id": "dbcb98d0-ad97-4c43-8f85-87b064de9145",
 								"exec": [
 									"pm.test(\"Set DNS subscription id variable\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -468,7 +473,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "7e340055-7491-40b3-bc4a-3078e39ee4ef",
+								"id": "44bf52d2-23c7-4876-b877-167787d36b06",
 								"exec": [
 									""
 								],
@@ -514,7 +519,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "fda2955e-dcc3-4def-ad70-2883406bf2cb",
+								"id": "7efcc4ff-2912-439a-afb4-ffa7ed827493",
 								"exec": [
 									""
 								],
@@ -565,7 +570,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "939ada61-2496-46d1-b32a-d9f7dda09f39",
+								"id": "1c049082-bc5a-40fe-938b-3fe8ea2485cd",
 								"exec": [
 									"pm.test(\"Set GSLB subscription id variable\", function() {",
 									"    var jsonData = pm.response.json();",
@@ -664,6 +669,11 @@
 								"key": "Authorization",
 								"value": "Bearer {{ACCESS_TOKEN}}",
 								"type": "text"
+							},
+							{
+								"key": "Labid",
+								"value": "dnslab",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -735,6 +745,11 @@
 							{
 								"key": "Authorization",
 								"value": "Bearer {{ACCESS_TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Labid",
+								"value": "dnslab",
 								"type": "text"
 							}
 						],
@@ -808,6 +823,11 @@
 								"key": "Authorization",
 								"type": "text",
 								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Labid",
+								"value": "dnslab",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -834,7 +854,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "ff7cfaf3-dda8-46e0-8f03-9509571e78a8",
+								"id": "710e4ec4-6618-4efa-96ac-03bc329ab3f9",
 								"exec": [
 									""
 								],
@@ -885,7 +905,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "787ce420-9e76-41f6-b150-71a407ede9de",
+								"id": "4732589e-b35b-4d29-8d0f-ef3606ae6706",
 								"exec": [
 									""
 								],
@@ -935,7 +955,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "ade23d8b-0d0a-418f-a70b-cb7edba0e426",
+								"id": "067d4d71-ea73-48f4-91b5-76b311479e13",
 								"exec": [
 									""
 								],
@@ -988,6 +1008,11 @@
 								"key": "Authorization",
 								"type": "text",
 								"value": "Bearer {{ACCESS_TOKEN}}"
+							},
+							{
+								"key": "Labid",
+								"value": "dnslab",
+								"type": "text"
 							}
 						],
 						"url": {
@@ -1010,7 +1035,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "65d82cfb-3edd-4471-8a27-f994abde09a3",
+								"id": "ecf22502-3015-4e34-bfde-1d34ed6f8eee",
 								"exec": [
 									"pm.test(\"Reset token variable\", function() {",
 									"    pm.environment.set(\"ACCESS_TOKEN\", \"\");",
