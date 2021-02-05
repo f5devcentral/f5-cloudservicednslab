@@ -62,11 +62,10 @@ The following are the demo application instances, some of which will be utilized
 .. csv-table::    
    :header: "Name", "Geography", "Cloud/Region", "IP", "URI"
 
-   "NA1", "North America", "AWS - US East (N. Virginia)", "34.229.48.248", "http://na1-auction.cloudservicesdemo.net/"
-   "NA2", "North America", "AWS – US East (N. Virginia)", "318.232.64.254", "http://na2-auction.cloudservicesdemo.net/"
-   "NA3", "North America", "Azure – US East", "13.82.106.211", "http://na3-auction.cloudservicesdemo.net/"
-   "EU", "Europe", "AWS – Europe (Frankfurt)", "3.122.191.227", "http://eu-auction.cloudservicesdemo.net/"
- 
+   "EU", "Europe", "AWS – Europe (Frankfurt)", "35.180.122.91", "http://eu1-auction.securelab.online/"
+   "NA1", "North America", "AWS - US East (N. Virginia)", "34.229.48.248", "http://na1-auction.securelab.online/"
+   "NA2", "North America", "AWS – US East (N. Virginia)", "18.232.64.254", "http://na2-auction.securelab.online/"
+   "NA3", "North America", "Azure – US East", "52.249.252.91", "http://na3-auction.securelab.online/"
 
 The following diagram is a simplified architecture of the Auction application: 
 
@@ -135,24 +134,27 @@ Open the Opera browser, click **Settings**,  **Advanced**, **Features** and then
 
 .. figure:: _figures/7.png 
 
-3. Postman Configuration  
+3. Postman Configuration
 ************************
 
-`a)` Download Postman `here <http://bit.ly/309wSLl>`_, open it, create a Postman account if you don’t have one and choose to do so, and sign in. 
+`a)` Open Postman, create a Postman account if you don’t have one and choose to do so, and sign in.
 
-`b)` Clone or download and extract the repository
+`b)` Use the button below to import collection and environment to the Postman or manually import it from the `Git repo for this lab <https://bit.ly/2Lj0VNH>`_
 
-.. figure:: _figures/120.png
+.. image:: https://run.pstmn.io/button.svg
+   :target: https://app.getpostman.com/run-collection/6735c1b3c0c020afe313#?env%5BF5%20Cloud%20Services%20DNS%20LAB%5D=W3sia2V5IjoiSE9TVE5BTUUiLCJ2YWx1ZSI6ImFwaS5jbG91ZHNlcnZpY2VzLmY1LmNvbSIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiQVBJX1ZFUlNJT04iLCJ2YWx1ZSI6InYxIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJETlNfV0VCX0FETUlOIiwidmFsdWUiOiI1NC4yMTEuMTIuMTczIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJVU0VSX0VNQUlMIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6IlVTRVJfUEFTU1dPUkQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiQUNDT1VOVF9OQU1FIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfV0=
 
-`c)` Import collection – **/postman/F5 Cloud Services DNS LAB.postman_collection.json** and environment – **/postman/F5 Cloud Services DNS LAB.postman_environment.json**.
 
-.. figure:: _figures/121.png
+.. figure:: _figures/124.png
 
-You will now see the imported collection (left side) with the calls that you will be utilizing grouped into several categories, as well as the environment variables (top right) used to store and pass data between Postman and the API.     
 
-.. figure:: _figures/2.jpg 
+You will now see your collection (left side) with calls in several categories, as well as environment variables (top right).
 
-You are now ready to interface with the F5 Cloud Services using Postman. 
+.. figure:: _figures/2.jpg
+
+
+You are now ready to interface with F5 Cloud Services using Postman.
+
 
 4. Zone Name 
 *************
@@ -291,7 +293,7 @@ You will see account ids, names, roles and other information in the body of resp
 
 Your "account_id" will be retrieved using "account_name" and used for creating user's instances. 
 
-.. figure:: _figures/28.jpg 
+.. figure:: _figures/28_1.png
 
 More detailed information on this API request can be found `here <http://bit.ly/2Gfu1r3>`_. 
 
@@ -317,7 +319,7 @@ More detailed information on this API request can be found `here <http://bit.ly/
 
 You will see “subscription_id” and created “service_instance_id” in the body.   
 
-.. figure:: _figures/41.jpg
+.. figure:: _figures/41_1.png
  
 The retrieved "subscription_id" is then stored for subsequent calls.
  
@@ -345,7 +347,7 @@ More detailed information on this API request can be found `here <http://bit.ly/
 
 Send the **Get DNS Subscription Zones** request which uses DNS “subscription_id” created a few steps above.  This will retrieve a zone file from your primary DNS server.  
 
-.. figure:: _figures/94.jpg
+.. figure:: _figures/94_1.png
 
 As a result, you will get the zone file describing your DNS zone and containing mappings between domain names and IP addresses.  
 
@@ -407,7 +409,7 @@ Let’s now create DNS Load Balancer Service to be able to balance loads across 
 
 `b)` Enter name of the zone we `created before <#zone-name>`_ and click **Create**.  
 
-.. figure:: _figures/27.jpg 
+.. figure:: _figures/27_1.png
 
 .. figure:: _figures/17.png 
    
@@ -492,7 +494,7 @@ After creating all the components (IP endpoint, Pool, Region and Monitor), we ca
 
    .. figure:: _figures/78.png
 
-   `3.` Go back to the DNS Load Balancer tab, click on your service and activate it.
+   `3.` Go back to the Load balanced records tab, click on the Save button and then on the Activate.
 
    .. figure:: _figures/119.png
 
@@ -519,11 +521,11 @@ Another way to test the new proximity rule is via **Command Prompt**.
 
    .. figure:: _figures/70.png 
 
-   `2.` Paste the following command to the **Command Prompt**: **nslookup "your FQDN name"** and press **Enter**.
+   `2.` Paste the following command to the **Command Prompt**: **nslookup auction."your FQDN name" 8.8.8.8** and press **Enter**.
 
-   .. figure:: _figures/68.png 
+   .. figure:: _figures/68_1.png
 
-   And you will see **34.229.48.248** IP in the response which belongs to **na1-auction** endpoint from **america** pool.  
+   And you will see **34.229.48.248** IP in the response which belongs to **na1-auction** endpoint from **america** pool.
 
   
 3. Add Multiple Ednpoints to Load Balanced Pool & Test
@@ -541,7 +543,7 @@ Let's now add a few more endpoints for load balancing of the application. Note t
    
    .. figure:: _figures/93.png 
    
-   Create one more endpoint repeating the step above using the following properties: "na3-auction" for name, "13.82.106.211" for IP address, "80" for port. You will have three endpoints as a result. 
+   Create one more endpoint repeating the step above using the following properties: "na3-auction" for name, "52.249.252.91" for IP address, "80" for port. You will have three endpoints as a result. 
    
    .. figure:: _figures/94.png 
    
@@ -561,6 +563,10 @@ Let's now add the newly created endpoints to the existing pool.
    Add one more endpoint and click **Save**. Now all three endpoints belong to one pool:
    
    .. figure:: _figures/97.png
+
+   Click save to apply the changes:
+
+   .. figure:: _figures/97_1.png
 
 `c)` Test via Default Browser
 
@@ -589,7 +595,7 @@ Let's now add a EU endpoint which is deployed on Amazon AWS.
    
    .. figure:: _figures/92.png 
    
-   `2.` Fill in name ("eu-auction"), IP address ("3.122.191.227"), port ("80") and select the monitor we've created above.
+   `2.` Fill in name ("eu1-auction"), IP address ("35.180.122.91"), port ("80") and select the monitor we've created above.
    
    .. figure:: _figures/100.png 
    
@@ -639,6 +645,10 @@ Go to the **Load balanced records** tab and click on your record. Set a new prox
 
 .. figure:: _figures/103.png
 
+Click Save to apply the changes
+
+.. figure:: _figures/103_1.png
+
 Click **Add Rule** and **Save** the record. The new proximity rule will direct requests from Europe region to **europe** pool. 
 
 `e)` Test using the Opera Browser 
@@ -665,17 +675,17 @@ Another way to test the new proximity rule is via **Command Prompt**.
 
    .. figure:: _figures/70.png 
 
-   `2.` Paste the following command to the **Command Prompt**: "nslookup auction.cloudservicesdemo.net 198.6.100.25". 
+   `2.` Paste the following command to the **Command Prompt**: "nslookup auction."your FQDN name" 198.6.100.25".
 
    .. figure:: _figures/68.png 
 
-   And you will see **34.229.48.248** IP in the response which belongs to **na1-auction** endpoint from **america** pool.  
+   And you will see **52.249.252.91** IP in the response which belongs to **na3-auction** endpoint from **america** pool.
 
-   `3.` Now let’s check the **europe** pool. Paste the following command to the **Command Prompt**: **nslookup auction.cloudservicesdemo.net 158.43.240.3**. 
+   `3.` Now let’s check the **europe** pool. Paste the following command to the **Command Prompt**: **nslookup auction."your FQDN name" 158.43.240.3**.
 
    .. figure:: _figures/71.png 
 
-   And you will see **3.122.191.227** IP in the response which belongs to **eu-auction** endpoint from **europe** pool. 
+   And you will see **35.180.122.91** IP in the response which belongs to **eu1-auction** endpoint from **europe** pool.
 
 
 5. Duplicate Load Balanced Record using JSON through the UI  
@@ -703,13 +713,13 @@ Let's now create a new Load-balancing service via UI to copy the record to. To d
 
    A new JSON configuration with the properties copied from the existing zone is ready.  
 
-   `3.` Return to the F5 Cloud Services portal and open the **DNS Load Balancer** tab. Click **Create**. 
+   `3.` Return to the F5 Cloud Services portal and open the **DNS Load Balancer** tab. Click **Configure service**.
 
-   .. figure:: _figures/85.png 
+   .. figure:: _figures/85.png
 
-   Paste "zone2" name which you copied in step 1 above and click **Create**.  
+   Paste "zone2" name which you copied in step 1 above and click **Save**.
 
-   .. figure:: _figures/86.png 
+   .. figure:: _figures/86.png
 
 
 `c)` Update JSON 
@@ -764,7 +774,7 @@ You will see “subscription_id” and created ”service_instance_id” in the 
 
 You may also notice that the current proximity rule is set to send traffic from: Everyone -> Americas pool. This means that only one endpoint (NA1) will be serving all requests now. We will subsequently configure proper load balancing and geoproximity rules. 
 
-.. figure:: _figures/48.jpg 
+.. figure:: _figures/48_1.png
 
 The retrieved "subscription_id" is then stored for subsequent calls. 
 
@@ -790,7 +800,7 @@ More detailed information on this API request can be found `here <http://bit.ly/
 3. Test NA Pool 
 ***************************
 
-Send the **Test NA Availability (lab)** request to execute a call against the Lab service API, which in turn uses an external VM (located in the USA) to run a "wget" to retrieve the response from http://auction.cloudservicesdemo.net. This should show the only available instance NA1 in the HTML that is returned. 
+Send the **Test NA Availability (lab)** request to execute a call against the Lab service API, which in turn uses an external VM (located in the USA) to run a "wget" to retrieve the response from http://auction.securelab.online. This should show the only available instance NA1 in the HTML that is returned.
 
 .. figure:: _figures/52.jpg 
 
