@@ -139,7 +139,7 @@ Open the Opera browser, click **Settings**,  **Advanced**, **Features** and then
 
 `a)` Open Postman, create a Postman account if you don’t have one and choose to do so, and sign in.
 
-`b)` Use the "Run in Postman" button below to import collection and environment to the Postman or manually import it from the `Git repo for this lab <https://bit.ly/2Lj0VNH>`_
+`b)` Use the "Run in Postman" button below to import collection and environment to the Postman or manually import it from the `Git repo for this lab <https://bit.ly/3q4B7UG>`_
 
 .. image:: https://run.pstmn.io/button.svg
    :target: https://app.getpostman.com/run-collection/76d7d2ee072842a4967a#?env%5BF5%20Cloud%20Services%20DNS%20LAB%5D=W3sia2V5IjoiSE9TVE5BTUUiLCJ2YWx1ZSI6ImFwaS5jbG91ZHNlcnZpY2VzLmY1LmNvbSIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiQVBJX1ZFUlNJT04iLCJ2YWx1ZSI6InYxIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJETlNfV0VCX0FETUlOIiwidmFsdWUiOiI1NC4yMTEuMTIuMTczIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJVU0VSX0VNQUlMIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6IlVTRVJfUEFTU1dPUkQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiQUNDT1VOVF9OQU1FIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfV0=
